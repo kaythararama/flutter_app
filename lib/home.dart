@@ -9,6 +9,7 @@ import 'view/design2.dart';
 import 'view/drawer.dart';
 import 'view/login.dart';
 import 'view/my_button.dart';
+import 'view/person_list.dart';
 import 'view/post_list_reusable.dart';
 import 'view/post_list_simple.dart';
 import 'service/post_service.dart';
@@ -120,6 +121,15 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context) => PostListReusable()
+                ));
+              }
+          ),
+          RaisedButton(
+              child: Text('SQLite Database'),
+              color: Theme.of(context).primaryColor,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) => PersonList()
                 ));
               }
           ),
