@@ -1,7 +1,9 @@
 
 
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/generated/locale_keys.g.dart';
 
 class MyLogin extends StatefulWidget {
   MyLogin({Key key}) : super(key: key);
@@ -36,7 +38,7 @@ class _MyLoginState extends State<MyLogin> {
                 decoration: InputDecoration(
                   icon: const Icon(Icons.person),
                   hintText: '',
-                  labelText: 'Name',
+                  labelText: tr(LocaleKeys.lblName),
                 ),
                 validator: (val) => val.isEmpty ? 'Name is required' : null,
                 onSaved: (val) => _name = val,
@@ -46,7 +48,7 @@ class _MyLoginState extends State<MyLogin> {
                   decoration: InputDecoration(
                     icon: const Icon(Icons.star),
                     hintText: '',
-                    labelText: 'Password',
+                    labelText: tr(LocaleKeys.lblPassword),
                   ),
                   validator: (val) => val.isEmpty ? 'Password required' : (val.length<6? 'Minimum password length is 6' : null),
                   onSaved: (val) => _password = val,
@@ -56,7 +58,7 @@ class _MyLoginState extends State<MyLogin> {
                   decoration: InputDecoration(
                     icon: const Icon(Icons.star),
                     hintText: '',
-                    labelText: 'Confirm password',
+                    labelText: tr(LocaleKeys.lblConfirmPassword),
                   ),
                   validator: (val) => val.isEmpty ? 'Password required' : (val.length<6? 'Minimum password length is 6' : null),
                   onSaved: (val) => _confirmPassword = val,
@@ -71,7 +73,7 @@ class _MyLoginState extends State<MyLogin> {
                         },
                       elevation: 1,
                       child: Text(
-                        'Login',
+                        tr(LocaleKeys.btnOK),
                         style: TextStyle(color: Colors.white),
                       ),
                       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0))

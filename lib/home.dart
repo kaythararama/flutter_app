@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/register.dart';
 import 'package:flutter_app/view/shopping.dart';
-import 'package:flutter_app/simple_internet_connection.dart';
+import 'package:flutter_svg/svg.dart';
 import 'view/bottom_nav.dart';
 import 'view/design.dart';
 import 'view/design2.dart';
@@ -12,7 +12,7 @@ import 'view/my_button.dart';
 import 'view/person_list.dart';
 import 'view/post_list_reusable.dart';
 import 'view/post_list_simple.dart';
-import 'service/post_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -24,11 +24,65 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  Language selectedLanguage;
+  List<Language> languages = <Language> [new Language("မြန်မာ", SvgPicture.asset( 'assets/images/myanmar.svg', semanticsLabel: 'My',height: 24, width: 24, )),
+    Language('English', SvgPicture.asset( 'assets/images/uk.svg', semanticsLabel: 'En',height: 24, width: 24, ))];
+
+  @override
+  void initState() {
+    super.initState();
+    selectedLanguage = languages[1];
+  }
+
+  Widget dropdownWidget() {
+    return new DropdownButtonHideUnderline(
+      child: DropdownButton<Language>(
+        //hint:  Text("Select item"),
+        value: selectedLanguage,
+        onChanged: (Language value) {
+          setState(() {
+            selectedLanguage = value;
+            if( value.name != 'English'){
+              context.locale = Locale('my','');
+            }else{
+              context.locale = Locale('en','');
+            }
+          });
+        },
+        items: languages.map((Language lang) {
+          return  DropdownMenuItem<Language>(
+            value: lang,
+            child: Row(
+              children: <Widget>[
+                lang.icon,
+                SizedBox(width: 10,),
+                Text(
+                  lang.name,
+                  style:  TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          new Theme(
+              data: Theme.of(context).copyWith(
+                canvasColor: Theme.of(context).primaryColor,
+              ),
+              child: dropdownWidget()
+          ),
+        ],
+
       ),
       body: ListView(
         children: <Widget>[
@@ -125,7 +179,10 @@ class _MyHomePageState extends State<MyHomePage> {
               }
           ),
           RaisedButton(
-              child: Text('SQLite Database'),
+              child: Text(
+                  'SQLite Database',
+                style: Theme.of(context).textTheme.headline2,
+              ),
               color: Theme.of(context).primaryColor,
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
@@ -144,4 +201,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+class Language {
+  const Language(this.name,this.icon);
+  final String name;
+  final SvgPicture icon;
 }
