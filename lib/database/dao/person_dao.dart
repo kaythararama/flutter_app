@@ -49,7 +49,8 @@ class PersonDao{
     final List<Map<String, dynamic>> maps = await _db.query(
         _tableName,
         limit: limit,
-        offset: offset
+        offset: offset,
+        orderBy: "id DESC"
     );
 
     return List.generate( maps.length, (i) {

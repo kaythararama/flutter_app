@@ -7,12 +7,15 @@ import 'view/bottom_nav.dart';
 import 'view/design.dart';
 import 'view/design2.dart';
 import 'view/drawer.dart';
+import 'view/google_map.dart';
 import 'view/login.dart';
 import 'view/my_button.dart';
 import 'view/person_list.dart';
 import 'view/post_list_reusable.dart';
 import 'view/post_list_simple.dart';
 import 'package:easy_localization/easy_localization.dart';
+
+import 'view/pull_to_refresh_list.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -187,6 +190,28 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context) => PersonList()
+                ));
+              }
+          ),
+          RaisedButton(
+              child: Text(
+                'Refresh List'
+              ),
+              color: Colors.green,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) => PullToRefreshList()
+                ));
+              }
+          ),
+          RaisedButton(
+              child: Text(
+                  'Google map'
+              ),
+              color: Colors.green,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) => GoogleMapSample()
                 ));
               }
           ),
