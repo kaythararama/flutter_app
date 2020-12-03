@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import 'generated/locale_keys.g.dart';
 import 'home.dart';
+import 'service/firebase_service.dart';
 
 void main() {
+  _initFirebase();
   //runApp(MyApp());
   runApp(
     EasyLocalization(
@@ -15,6 +16,14 @@ void main() {
     ),
   );
 
+}
+
+void _initFirebase() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  try{
+    FirebaseMessage _firebaseMessage = FirebaseMessage( );
+    await _firebaseMessage.initMessaging( );
+  }catch(e){}
 }
 
 class MyApp extends StatelessWidget {

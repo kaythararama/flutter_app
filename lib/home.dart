@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/view/register.dart';
 import 'package:flutter_app/view/shopping.dart';
 import 'package:flutter_svg/svg.dart';
+import 'service/firebase_service.dart';
 import 'view/bottom_nav.dart';
 import 'view/design.dart';
 import 'view/design2.dart';
@@ -213,6 +214,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context) => GoogleMapSample()
                 ));
+              }
+          ),
+          RaisedButton(
+              child: Text(
+                  'Firebase token'
+              ),
+              color: Colors.green,
+              onPressed: () async{
+                String token = await getFirebaseToken();
+                print('Token: $token');
               }
           ),
         ],
